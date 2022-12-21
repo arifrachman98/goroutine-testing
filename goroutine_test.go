@@ -29,6 +29,21 @@ func TestManyGoroutine(t *testing.T) {
 	time.Sleep(5 * time.Second)
 }
 
+func TestCreateChannel(t *testing.T) {
+	channel := make(chan string) //Membuka channel baru
+	defer close(channel)         //Menutup Channel dan dieksekusi terakhir kali dengan defer
+
+	go func() {
+		time.Sleep(2 * time.Second)
+		channel <- "Arif Rachman Hakim" //Mengirim data ke channel
+		fmt.Println("Pengiriman data ke channel selesai")
+	}()
+
+	data := <-channel //Menerima data dari channel
+	fmt.Println(data)
+	time.Sleep(5 * time.Second)
+}
+
 /*
 	Go Routine tidak cocok digunakan pada function yang mengembalikan nilai (function), karna nilai tersebut tidak akan di tangkap oleh goroutine
 	Akan tetapi, goroutine sangat cocok digunakan pada function yang tidak mengembalikan nilai (method)
