@@ -172,3 +172,10 @@ func TestRangeChannel(t *testing.T) {
 	Ketika channel di close(), maka secara otomatis perulangan tersebut akan terhenti secara otomatis.
 	Dengan cara ini lebih sederhana dari pada kita melakukan pengecekan channel secara manual. Cara ini disebut sebagai Range Channel
 */
+
+/*
+	Ada kondisi dimana kita membuat beberapa channel dan menjalankan beberapa goroutine, lalu kita ingin mendapatkan data dari
+	semua channel tersebut. Untuk mendapatkan semua data dari tiap channel kita dapat menggunakan select channel pada golang.
+	Dengan select channel, kita bisa memilih data tercepat dari beberapa channel. Jika data datang ke channel secara bersamaan
+	maka data akan dipilih secara random.
+*/
