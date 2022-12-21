@@ -124,3 +124,9 @@ func TestInOutChannel(t *testing.T) {
 	Mengirim data :	func OnlyIn(chann chan<- string)
 	Menerima data : func OnlyOut(chann <-chan string)
 */
+
+/*
+	Ada kondisi dimana channel dapat menerima data lebih banyak dibandingkan mengirim data yang ada pada channel itu sendiri,
+	dengan demikian pengiriman data pada channel akan ikut melambat. Maka dari itu diperlukan Buffered Channel untuk meng antisipasi hal demikian.
+	Buffered channel sendiri merupakan sebuah wadah yang digunakan untuk menampung pengiriman data yang menumpuk pada channel
+*/
