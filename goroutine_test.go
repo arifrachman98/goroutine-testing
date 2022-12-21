@@ -70,3 +70,13 @@ func TestCreateChannel(t *testing.T) {
 	ketika membuat Channel, kita dapat meng implementasikan nya dengan 'make()'
 	Lalu, saat membuat channel, kita harus menentukan tipe data yang akan digunakan pada channel tersebut
 */
+
+/*
+	Jika channel sudah mengirimkan data tapi tidak ada penerimanya, maka akan terjadi blocking pada program
+	Jika ada penerima pada channel akan tetapi tidak terdapat pengirimnya, maka akan terjadi deadlock pada program
+	Untuk mencegah hal tersebut, diperlukan langkah yang tepat sebagai berikut :
+	1. Pastika kita membuat Channel
+	2. Tentukan tipe data yang akan diterima oleh channel
+	3. Pastikan channel yang kita buat memiliki pengirim dan penerima
+	4. Setelah proses pengiriman dan penerimaan data pada channel, pastikan channel tertutup
+*/
