@@ -3,6 +3,7 @@ package belajargolanggoroutine
 import (
 	"fmt"
 	"strconv"
+	"sync"
 	"testing"
 	"time"
 )
@@ -147,11 +148,14 @@ func TestSelectChannel(t *testing.T) {
 
 func TestRaceCondition(t *testing.T) {
 	x := 0
+	var mutex sync.Mutex
 
 	for i := 1; i <= 1000; i++ {
 		go func() {
 			for j := 1; j <= 100; j++ {
+				mutex.Lock()
 				x = x + 1
+				mutex.Unlock()
 			}
 		}()
 	}
@@ -222,4 +226,8 @@ func TestRaceCondition(t *testing.T) {
 	semua channel tersebut. Untuk mendapatkan semua data dari tiap channel kita dapat menggunakan select channel pada golang.
 	Dengan select channel, kita bisa memilih data tercepat dari beberapa channel. Jika data datang ke channel secara bersamaan
 	maka data akan dipilih secara random.
+*/
+
+/*
+	Untuk mengatasi race condition pada goroutine, gunakan sync.mutex
 */
