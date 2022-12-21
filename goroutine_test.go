@@ -147,3 +147,10 @@ func TestBufferedChannel(t *testing.T) {
 	dengan demikian pengiriman data pada channel akan ikut melambat. Maka dari itu diperlukan Buffered Channel untuk meng antisipasi hal demikian.
 	Buffered channel sendiri merupakan sebuah wadah yang digunakan untuk menampung pengiriman data yang menumpuk pada channel
 */
+
+/*
+	Ada kondisi dimana sebuah channel menerima data secara terus menerus dari pengirim dan kita tidak mengetahui kapan channel tersebut akan berhenti menerima data.
+	Hal yang dapat kita lakukan untuk menanggulangi hal tersebut adalah dengan menggunakan perulangan range ketika menerima data dari channel.
+	Ketika channel di close(), maka secara otomatis perulangan tersebut akan terhenti secara otomatis.
+	Dengan cara ini lebih sederhana dari pada kita melakukan pengecekan channel secara manual. Cara ini disebut sebagai Range Channel
+*/
