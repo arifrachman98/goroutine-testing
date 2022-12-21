@@ -85,9 +85,9 @@ func TestBufferedChannel(t *testing.T) {
 	chann := make(chan string, 3)
 	defer close(chann)
 
-	chann <- "Test1"
-	chann <- "Test2"
-	chann <- "Test3"
+	for i := 1; i <= cap(chann); i++ {
+		chann <- "Hahaha"
+	}
 
 	time.Sleep(2 * time.Second)
 	for i := 1; i <= cap(chann); i++ {
