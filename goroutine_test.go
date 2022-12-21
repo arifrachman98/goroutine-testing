@@ -61,6 +61,26 @@ func TestChannelAsParameter(t *testing.T) {
 	time.Sleep(5 * time.Second)
 }
 
+func OnlyIn(chann chan<- string) {
+	time.Sleep(1 * time.Second)
+	chann <- "Arif Rachman Hakim"
+}
+
+func OnlyOut(chann <-chan string) {
+	data := <-chann
+	fmt.Println(data)
+}
+
+func TestInOutChannel(t *testing.T) {
+	chenn := make(chan string)
+	defer close(chenn)
+
+	go OnlyIn(chenn)
+	go OnlyOut(chenn)
+
+	time.Sleep(1 * time.Second)
+}
+
 /*
 	Go Routine tidak cocok digunakan pada function yang mengembalikan nilai (function), karna nilai tersebut tidak akan di tangkap oleh goroutine
 	Akan tetapi, goroutine sangat cocok digunakan pada function yang tidak mengembalikan nilai (method)
