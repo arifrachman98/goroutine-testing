@@ -110,8 +110,10 @@ func TestRangeChannel(t *testing.T) {
 	}()
 
 	for data := range chann {
-		fmt.Println(data)
+		fmt.Println("Berhasi melakukan", data)
 	}
+
+	fmt.Println("Selesai")
 }
 
 /*
