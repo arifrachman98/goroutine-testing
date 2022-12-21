@@ -81,6 +81,23 @@ func TestInOutChannel(t *testing.T) {
 	time.Sleep(1 * time.Second)
 }
 
+func TestBufferedChannel(t *testing.T) {
+	chann := make(chan string, 3)
+	defer close(chann)
+
+	chann <- "Test1"
+	chann <- "Test2"
+	chann <- "Test3"
+
+	time.Sleep(2 * time.Second)
+	for i := 1; i <= cap(chann); i++ {
+		fmt.Println("Data ke-", i, <-chann)
+	}
+
+	fmt.Println("Selesai")
+	time.Sleep(3 * time.Second)
+}
+
 /*
 	Go Routine tidak cocok digunakan pada function yang mengembalikan nilai (function), karna nilai tersebut tidak akan di tangkap oleh goroutine
 	Akan tetapi, goroutine sangat cocok digunakan pada function yang tidak mengembalikan nilai (method)
