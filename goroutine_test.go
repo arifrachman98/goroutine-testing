@@ -49,3 +49,9 @@ func TestManyGoroutine(t *testing.T) {
 	- dapat diambil oleh lebih dari satu goroutine
 	- jika tidak digunakan, channel sebaiknya di close agar tidak menyebabkan memory leak
 */
+
+/*
+	Channel pada golang direpresentasikan dengan tipe data chan
+	ketika membuat Channel, kita dapat meng implementasikan nya dengan 'make()'
+	Lalu, saat membuat channel, kita harus menentukan tipe data yang akan digunakan pada channel tersebut
+*/
