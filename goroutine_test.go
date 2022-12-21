@@ -164,6 +164,40 @@ func TestRaceCondition(t *testing.T) {
 	fmt.Println("Counter : ", x)
 }
 
+type BankAccount struct {
+	RWmutex sync.RWMutex
+	saldo   int
+}
+
+func (akun *BankAccount) AddBalance(jumlah int) {
+	akun.RWmutex.Lock()
+	akun.saldo = akun.saldo + jumlah
+	akun.RWmutex.Unlock()
+}
+
+func (akun *BankAccount) GetBalance() int {
+	akun.RWmutex.RLock()
+	saldo := akun.saldo
+	akun.RWmutex.RUnlock()
+	return saldo
+}
+
+func TestRWmutex(t *testing.T) {
+	akun := BankAccount{}
+
+	for i := 1; i < 1000; i++ {
+		go func() {
+			for j := 1; j < 100; j++ {
+				akun.AddBalance(2)
+				fmt.Println(akun.GetBalance())
+			}
+		}()
+	}
+
+	time.Sleep(3 * time.Second)
+	fmt.Println("Saldo Total :", akun.GetBalance())
+}
+
 /*
 	Go Routine tidak cocok digunakan pada function yang mengembalikan nilai (function), karna nilai tersebut tidak akan di tangkap oleh goroutine
 	Akan tetapi, goroutine sangat cocok digunakan pada function yang tidak mengembalikan nilai (method)
