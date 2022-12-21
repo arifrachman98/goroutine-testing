@@ -97,3 +97,10 @@ func TestChannelAsParameter(t *testing.T) {
 	3. Pastikan channel yang kita buat memiliki pengirim dan penerima
 	4. Setelah proses pengiriman dan penerimaan data pada channel, pastikan channel tertutup
 */
+
+/*
+	Channel dapat diatur sebagai IN(mengirim data) saja atau sebagai OUT(menerima data) saja dengan cara menandainya pada parameter.
+	Example :
+	Mengirim data :	func OnlyIn(chann chan<- string)
+	Menerima data : func OnlyOut(chann <-chan string)
+*/
