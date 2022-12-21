@@ -116,6 +116,41 @@ func TestRangeChannel(t *testing.T) {
 	fmt.Println("Selesai")
 }
 
+func TestSelectChannel(t *testing.T) {
+	chann1 := make(chan string)
+	chann2 := make(chan string)
+	defer close(chann1)
+	defer close(chann2)
+	for i := 0; i < 10; i++ {
+		go OnlyIn(chann1)
+	}
+
+	for j := 0; j < 10; j++ {
+		go GiveResponse(chann2)
+	}
+
+	count := 0
+	for {
+		select {
+		case data := <-chann1:
+			for i := 0; i < 10; i++ {
+				fmt.Println("Data ke-", i, "dari channel 1:", data)
+			}
+			count++
+		case data := <-chann2:
+			for i := 0; i < 10; i++ {
+				fmt.Println("Data", i, "dari channel 2:", data)
+			}
+			count++
+		}
+
+		if count == 20 {
+			break
+		}
+	}
+
+}
+
 /*
 	Go Routine tidak cocok digunakan pada function yang mengembalikan nilai (function), karna nilai tersebut tidak akan di tangkap oleh goroutine
 	Akan tetapi, goroutine sangat cocok digunakan pada function yang tidak mengembalikan nilai (method)
