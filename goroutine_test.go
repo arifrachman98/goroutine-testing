@@ -142,6 +142,8 @@ func TestSelectChannel(t *testing.T) {
 				fmt.Println("Data", i, "dari channel 2:", data)
 			}
 			count++
+		default:
+			println("Menunggu Data")
 		}
 
 		if count == 20 {
