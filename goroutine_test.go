@@ -2,6 +2,7 @@ package belajargolanggoroutine
 
 import (
 	"fmt"
+	"strconv"
 	"testing"
 	"time"
 )
@@ -96,6 +97,21 @@ func TestBufferedChannel(t *testing.T) {
 
 	fmt.Println("Selesai")
 	time.Sleep(3 * time.Second)
+}
+
+func TestRangeChannel(t *testing.T) {
+	chann := make(chan string)
+
+	go func() {
+		for i := 1; i <= 10; i++ {
+			chann <- "Perulangan ke-" + strconv.Itoa(i)
+		}
+		close(chann)
+	}()
+
+	for data := range chann {
+		fmt.Println(data)
+	}
 }
 
 /*
